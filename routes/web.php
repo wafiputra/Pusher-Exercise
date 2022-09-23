@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MyEvent;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,9 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::post('/notif/public', function ($message) {
+        MyEvent::dispatch($message);
+    });
 });
 
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
