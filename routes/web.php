@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    event(new App\Events\MyEvent('Someone'));
-    return "Event has been sent!";
+Auth::routes();
+
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
+
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+});
+
+Route::middleware(['auth', 'user-access:manager'])->group(function () {
+    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+});
+// Route::get('/test', function () {
+//     event(new App\Events\MyEvent('Someone'));
+//     return "Event has been sent!";
+// });
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
