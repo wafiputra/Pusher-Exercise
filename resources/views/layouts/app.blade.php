@@ -18,6 +18,20 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-notifications.min.css">
+    <style>
+       #notifDiv {
+        z-index:10000;
+        display: none;
+        background: green;
+        font-weight: 450;
+        width: 350px;
+        position: fixed;
+        top: 80%;
+        left: 5%;
+        color: white;
+        padding: 5px 20px;
+       }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -34,6 +48,8 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 </div>
+
+                <div id="notifDiv"></div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -104,7 +120,7 @@
         <script src="//js.pusher.com/3.1/pusher.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             var notificationsWrapper   = $('.dropdown-notifications');
             var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
             var notificationsCountElem = notificationsToggle.find('i[data-count]');
@@ -125,10 +141,10 @@
             });
 
             // Subscribe to the channel we specified in our Laravel Event
-            var channel = pusher.subscribe('my-channel');
+            var channel = pusher.subscribe('notif-channel');
 
              // Bind a function to a Event (the full Laravel class)
-            channel.bind('my-event', function(data) {
+            channel.bind('new-event', function(data) {
                 var existingNotifications = notifications.html();
                 var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
                 var newNotificationHtml = `
@@ -156,7 +172,7 @@
                 notificationsWrapper.find('.notif-count').text(notificationsCount);
                 notificationsWrapper.show();
             });
-        </script>
+        </script> --}}
 
         <main class="py-4">
             @yield('content')

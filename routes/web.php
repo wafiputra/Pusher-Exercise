@@ -2,6 +2,7 @@
 
 use App\Events\MyEvent;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotifController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
 });
+
+Route::post('send_notif', [NotifController::class, 'send_notif']);
+
 // Route::get('/test', function () {
 //     event(new App\Events\MyEvent('Someone'));
 //     return "Event has been sent!";
