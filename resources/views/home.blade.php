@@ -58,7 +58,10 @@
         var channel = pusher.subscribe('notif-channel');
 
         channel.bind('new-event', function(data) {
-            alert(JSON.stringify(data));
+            console.log(data.to);
+            if(data.to == '3'){
+                alert(data.to);
+            }
             // if(data.from) {
             //     let pending = parseInt($('#' + data.from).find('.pending').html());
             //     if(pending) {
