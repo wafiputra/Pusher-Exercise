@@ -60,7 +60,7 @@
         channel.bind('new-event', function(data) {
             console.log(data.to);
             if(data.to == '3'){
-                alert(data.to);
+                alert("Notif to: "+data.to+", Message: "+data.messages);
             }
             // if(data.from) {
             //     let pending = parseInt($('#' + data.from).find('.pending').html());

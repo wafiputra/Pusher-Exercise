@@ -58,7 +58,7 @@
         channel.bind('new-event', function(data) {
             console.log(data.to);
             if(data.to == '2'){
-                alert(data.to);
+                alert("Notif to: "+data.to+", Message: "+data.message);
             }
             // if(data.from) {
             //     let pending = parseInt($('#' + data.from).find('.pending').html());

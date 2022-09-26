@@ -36,7 +36,10 @@ class NotifController extends Controller
             $options
         );
 
-        $data = ['to' => $id];
+        $data = [
+            'to' => $id,
+            'message' => $request['notif']
+        ];
         $pusher->trigger('notif-channel', 'new-event', $data);
 
         if ($notification->save()) {

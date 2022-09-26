@@ -59,7 +59,7 @@
         channel.bind('new-event', function(data) {
             console.log(data.to);
             if(data.to == '1'){
-                alert(data.to);
+                alert("Notif to: "+data.to+", Message: "+data.message);
             }
 
             if(data.from) {
