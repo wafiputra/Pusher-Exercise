@@ -61,14 +61,15 @@
             if(data.to == '1'){
                 alert(data.to);
             }
-            // if(data.from) {
-            //     let pending = parseInt($('#' + data.from).find('.pending').html());
-            //     if(pending) {
-            //         $('#' + data.from).find('.pending').html(pending + 1);
-            //     } else {
-            //         $('#' + data.from).html('<a href="#" class="nav-link" data-toggle="dropdown"><i class="fa-solid fa-bell"><span class="badge badge-danger pending">1</span></i></a>');
-            //     }
-            // }
+
+            if(data.from) {
+                let pending = parseInt($('#' + data.from).find('.pending').html());
+                if(pending) {
+                    $('#' + data.from).find('.pending').html(pending + 1);
+                } else {
+                    $('#' + data.from).html('<a href="#" class="nav-link" data-toggle="dropdown"><i class="fa-solid fa-bell"><span class="badge badge-danger pending">1</span></i></a>');
+                }
+            }
         });
 
         $.ajaxSetup({
