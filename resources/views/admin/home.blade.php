@@ -50,7 +50,7 @@
 <script text="javascript">
     $(document).ready(function(){
 
-        var pusher = new Pusher('cb2c677f4c82c2efbf5d', {
+        var pusher = new Pusher('1fdc16af289a8c1d57b7', {
             cluster: 'ap1'
         });
 
@@ -58,6 +58,14 @@
 
         channel.bind('new-event', function(data) {
             alert(JSON.stringify(data));
+            // if(data.from) {
+            //     let pending = parseInt($('#' + data.from).find('.pending').html());
+            //     if(pending) {
+            //         $('#' + data.from).find('.pending').html(pending + 1);
+            //     } else {
+            //         $('#' + data.from).html('<a href="#" class="nav-link" data-toggle="dropdown"><i class="fa-solid fa-bell"><span class="badge badge-danger pending">1</span></i></a>');
+            //     }
+            // }
         });
 
         $.ajaxSetup({
@@ -88,8 +96,8 @@
                         setTimeout(() => {
                             $('#notifDiv').fadeOout();
                         }, 3000);
-                        $('[name="recipient"]');
-                        $('[name="notif"]');
+                        $('[name="recipient"]').val('');
+                        $('[name="notif"]').val('');
                     }else{
                         $('#notifDiv').fadeIn();
                         $('#notifDiv').css('background', 'red');
@@ -102,135 +110,6 @@
                 }
             });
         })
-
-        // $('.save_button').on('click', function(e){
-        //     let recipient = $('#recipient').val();
-        //     let notif = $('#notif').val();
-
-        //     // const form = $(this).parents('form');
-
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: 'send_notif',
-        //         data: {
-        //             recipient: recipient,
-        //             notif: notif
-        //         },
-        //         // processData: false,
-        //         // contentType: 'application/json',
-        //         success: function(data){
-        //             console.log(data);
-        //             if(data.status){
-        //                 $('#notifDiv').fadeIn();
-        //                 $('#notifDiv').css('background', 'green');
-        //                 $('#notifDiv').text(data.message);
-        //                 setTimeout(() => {
-        //                     $('#notifDiv').fadeOout();
-        //                 }, 3000);
-        //                 $('[name="recipient"]');
-        //                 $('[name="notif"]');
-        //             }else{
-        //                 $('#notifDiv').fadeIn();
-        //                 $('#notifDiv').css('background', 'red');
-        //                 $('#notifDiv').text('Something Went Wrong');
-        //                 setTimeout(() => {
-        //                     $('#notifDiv').fadeOout();
-        //                 }, 3000);
-
-        //             }
-        //         },
-        //         error:function(err) {
-        //             console.log(err);
-        //         }
-        //     });
-        //     // $(form).validate({
-        //     //     rules: {
-        //     //         recipient: {
-        //     //             required: true
-        //     //         }
-        //     //     },
-        //     //     message: {
-        //     //         recipient: "Recipient is required"
-        //     //     },
-        //     //     submitHandler: function(){
-        //     //         // var formData = new FormData(form[0]);
-
-        //     //         $.ajax({
-        //     //             type: 'POST',
-        //     //             url: 'send_notif',
-        //     //             data: {
-        //     //                 recipient: recipient,
-        //     //                 notif: notif
-        //     //             },
-        //     //             // processData: false,
-        //     //             // contentType: 'application/json',
-        //     //             success: function(data){
-        //     //                 console.log(data);
-        //     //                 if(data.status){
-        //     //                     $('#notifDiv').fadeIn();
-        //     //                     $('#notifDiv').css('background', 'green');
-        //     //                     $('#notifDiv').text(data.message);
-        //     //                     setTimeout(() => {
-        //     //                        $('#notifDiv').fadeOout();
-        //     //                     }, 3000);
-        //     //                     $('[name="recipient"]');
-        //     //                     $('[name="notif"]');
-        //     //                 }else{
-        //     //                     $('#notifDiv').fadeIn();
-        //     //                     $('#notifDiv').css('background', 'red');
-        //     //                     $('#notifDiv').text('Something Went Wrong');
-        //     //                     setTimeout(() => {
-        //     //                        $('#notifDiv').fadeOout();
-        //     //                     }, 3000);
-
-        //     //                 }
-        //     //             },
-        //     //             error:function(err) {
-        //     //                 console.log(err);
-        //     //             }
-        //     //         });
-        //     //     }
-        //     // });
-
-        //     // $.ajax({
-        //     //     type: 'POST',
-        //     //     url: '/send_notif',
-        //     //     data: {
-        //     //         recipient: recipient,
-        //     //         notif: notif
-        //     //     },
-        //     //     processData: false,
-        //     //     contentType: 'application/json',
-        //     //     success: function(data){
-        //     //         console.log(data);
-        //     //         if(data.status){
-        //     //             $('#notifDiv').fadeIn();
-        //     //             $('#notifDiv').css('background', 'green');
-        //     //             $('#notifDiv').text(data.message);
-        //     //             setTimeout(() => {
-        //     //                 $('#notifDiv').fadeOout();
-        //     //             }, 3000);
-        //     //             $('[name="recipient"]');
-        //     //             $('[name="notif"]');
-        //     //         }else{
-        //     //             $('#notifDiv').fadeIn();
-        //     //             $('#notifDiv').css('background', 'red');
-        //     //             $('#notifDiv').text('Something Went Wrong');
-        //     //             setTimeout(() => {
-        //     //                 $('#notifDiv').fadeOout();
-        //     //             }, 3000);
-
-        //     //         }
-        //     //     }
-        //     // });
-        // });
     });
-
-    var channel = pusher.subscribe('notif-channel');
-    // channel.bind('new-event', function(data) {
-        // if
-    //   alert(JSON.stringify(data));
-    // });
 </script>
-
 @endpush

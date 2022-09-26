@@ -19,7 +19,7 @@ class NotifController extends Controller
         $notif = $request->recipient;
 
         $message = new Message;
-        $message->from = Auth::user()->id;
+        $message->from = $request['recipient'];
         $id = $message->from;
         $message->message = $notif;
         $message->save();
@@ -30,13 +30,13 @@ class NotifController extends Controller
         );
 
         $pusher = new Pusher(
-            env('PUSHER_APP_ID'),
             env('PUSHER_APP_KEY'),
             env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
             $options
         );
 
-        $data = ['from' => $id];
+        $data = ['to' => $id];
         $pusher->trigger('notif-channel', 'new-event', $data);
 
         if ($notification->save()) {

@@ -35,50 +35,39 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div id="notifDiv"></div>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white shadow-sm">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="">{{ env('APP_NAME') }}
+                    {{-- {{ Str::ucfirst(Auth::user()->name) }} --}}
                 </a>
-                </div>
-
-                <div id="notifDiv"></div>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="dropdown dropdown-notifications">
-                            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-                                <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
-                            </a>
-
-                            <div class="dropdown-container">
-                                <div class="dropdown-toolbar">
-                                    <div class="dropdown-toolbar-actions">
-                                        <a href="#">Mark all as read</a>
-                                    </div>
-                                    <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
-                                </div>
-                                <ul class="dropdown-menu">
-                                </ul>
-                                <div class="dropdown-footer text-center">
-                                    <a href="#">View All</a>
-                                </div>
-                            </div>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul>
+                        <li class="navbar-item px-2">
+                            <a href="" class="nav-link active">Dashboard</a>
                         </li>
-                        <li><a href="#">Timeline</a></li>
-                        <li><a href="#">Friends</a></li>
+                    </ul>
+
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+                        @foreach ($notification as $key)
+                        <li class="nav-item dropdown mr-2" id="{{ $key->id }}">
+                            <a href="#" class="nav-link" data-toggle="dropdown">
+                                @if ($key->unread)
+                                <i class="fa-solid fa-bell">
+                                    <span class="badge badge-danger">{{ $key->unread }}</span>
+                                </i>
+                                @endif
+                            </a>
+                        </li>
+                        @endforeach
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto" style="padding-left: 75%">
+                    <ul class="navbar-nav ml-auto" style="padding-left: 75%">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -117,7 +106,7 @@
         </nav>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="//js.pusher.com/3.1/pusher.min.js"></script>
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
         {{-- <script type="text/javascript">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $notification = DB::select('select users.id, users.name, users.email, COUNT(messages.status) as unread from users left join messages on users.id = messages.from AND messages.status = 0 where users.id = ' . Auth::id() . ' group by users.id, users.name, users.email');
+        return view('home', compact('notification', $notification));
     }
 
     /**
@@ -33,7 +36,8 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('admin.home');
+        $notification = DB::select('select users.id, users.name, users.email, COUNT(messages.status) as unread from users left join messages on users.id = messages.from AND messages.status = 0 where users.id = ' . Auth::id() . ' group by users.id, users.name, users.email');
+        return view('admin.home', compact('notification', $notification));
     }
 
     /**
@@ -43,6 +47,7 @@ class HomeController extends Controller
      */
     public function managerHome()
     {
-        return view('manager.home');
+        $notification = DB::select('select users.id, users.name, users.email, COUNT(messages.status) as unread from users left join messages on users.id = messages.from AND messages.status = 0 where users.id = ' . Auth::id() . ' group by users.id, users.name, users.email');
+        return view('manager.home', compact('notification', $notification));
     }
 }
