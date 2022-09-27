@@ -1,8 +1,11 @@
 <?php
 
 use App\Events\MyEvent;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\NotifController;
+use App\Http\Controllers\PrivateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,17 +30,18 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
     Route::post('/notif/public', function ($message) {
         MyEvent::dispatch($message);
     });
 });
 
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    Route::get('/manager/home', [ManagerController::class, 'index'])->name('manager.home');
 });
 
 Route::post('send_notif', [NotifController::class, 'send_notif']);
+Route::post('send_private', [PrivateController::class, 'send_private']);
 
 // Route::get('/test', function () {
 //     event(new App\Events\MyEvent('Someone'));

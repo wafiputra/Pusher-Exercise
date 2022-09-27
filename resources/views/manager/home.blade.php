@@ -53,13 +53,14 @@
             cluster: 'ap1'
         });
 
-        var channel = pusher.subscribe('notif-channel');
+        var channel = pusher.subscribe("user."+{{ auth()->id() }});
 
-        channel.bind('new-event', function(data) {
+        channel.bind('PrivateEvent', function(data) {
             console.log(data.to);
-            if(data.to == '2'){
-                alert("Notif to: "+data.to+", Message: "+data.message);
-            }
+            alert("Notif to: "+data.to+", Message: "+data.message);
+            // if(data.to == '2'){
+            //     alert("Notif to: "+data.to+", Message: "+data.message);
+            // }
             if(data.from) {
                 let pending = parseInt($('#' + data.from).find('.pending').html());
                 if(pending) {
@@ -84,7 +85,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/send_notif',
+                url: '/send_private',
                 data: {
                     recipient: recipient,
                     notif: notif

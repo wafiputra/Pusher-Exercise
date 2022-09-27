@@ -53,7 +53,7 @@
 
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @foreach ($notification as $key)
+                        {{-- @foreach ($notification as $key)
                         <li class="nav-item dropdown mr-2" id="{{ $key->id }}">
                             <a href="#" class="nav-link" data-toggle="dropdown">
                                 @if ($key->unread)
@@ -63,7 +63,7 @@
                                 @endif
                             </a>
                         </li>
-                        @endforeach
+                        @endforeach --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
